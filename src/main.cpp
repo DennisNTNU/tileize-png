@@ -104,8 +104,8 @@ void makeTiles(unsigned char* image, unsigned int width, unsigned int height, co
     printf("\n");
 }
 
-void makeMipmap(unsigned char* image, unsigned int width, unsigned int height,
-                unsigned char** image_mipmap, unsigned int* width_mipmap, unsigned int* height_mipmap)
+void makeMipmap(unsigned char* image, unsigned long int width, unsigned long int height,
+                unsigned char** image_mipmap, unsigned long int* width_mipmap, unsigned long int* height_mipmap)
 {
     *width_mipmap = width/2;
     *height_mipmap = height/2;
@@ -113,9 +113,9 @@ void makeMipmap(unsigned char* image, unsigned int width, unsigned int height,
     *image_mipmap = (unsigned char*)malloc(4*(*width_mipmap)*(*height_mipmap));
 
     printf("Making mipmap\ny: ");
-    for (unsigned int y = 0; y < (*height_mipmap); y++)
+    for (unsigned long int y = 0; y < (*height_mipmap); y++)
     {
-        for (unsigned int x = 0; x < (*width_mipmap); x++)
+        for (unsigned long int x = 0; x < (*width_mipmap); x++)
         {
             unsigned long int image_coord_tl = (2*y + 0)*width*4 + (2*x + 0)*4;
             unsigned long int image_coord_tr = (2*y + 0)*width*4 + (2*x + 1)*4;
@@ -196,8 +196,8 @@ int main(int argc, char** argv)
 
         // saving tiles for the other zoom/mipmap lavels
         unsigned char* previous_image_buffer_mipmap = image_buffer;
-        unsigned int previous_width_mipmap = width;
-        unsigned int previous_height_mipmap = height;
+        unsigned long int previous_width_mipmap = width;
+        unsigned long int previous_height_mipmap = height;
 
         for (int i = mipmap_levels-1; i > 0; i--)
         {
@@ -205,8 +205,8 @@ int main(int argc, char** argv)
             mkdir(dir_name, 0775);
 
             unsigned char* image_buffer_mipmap = NULL;
-            unsigned int width_mipmap = 0;
-            unsigned int height_mipmap = 0;
+            unsigned long int width_mipmap = 0;
+            unsigned long int height_mipmap = 0;
             makeMipmap(previous_image_buffer_mipmap, previous_width_mipmap, previous_height_mipmap,
                 &image_buffer_mipmap, &width_mipmap, &height_mipmap);
 
